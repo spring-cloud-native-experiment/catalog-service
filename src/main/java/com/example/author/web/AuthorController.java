@@ -30,8 +30,7 @@ class AuthorController {
 
     @RequestMapping(method = GET)
     List<Author> getAllAuthors() {
-        return authorService.findAllAuthors()
-                .collect(toList());
+        return authorService.findAllAuthors();
     }
 
     @RequestMapping(path = "/{authorId}", method = GET)
