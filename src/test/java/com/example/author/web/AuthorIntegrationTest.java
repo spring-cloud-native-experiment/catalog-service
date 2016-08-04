@@ -40,7 +40,8 @@ public class AuthorIntegrationTest {
 
     @Test
     public void findsAuthorById() throws Exception {
-        given().port(localServerPort).
+        given().
+                port(localServerPort).
                 pathParam("id", 123).
         when().
                 get("/authors/{id}").
@@ -58,7 +59,8 @@ public class AuthorIntegrationTest {
         BDDMockito.given(this.bookService.getBookIdsForAuthorId(1L))
                 .willReturn(Collections.singletonList(1L));
 
-        given().port(localServerPort).
+        given().
+                port(localServerPort).
                 pathParam("id", 1).
         when().
                 get("/authors/{id}/books").
