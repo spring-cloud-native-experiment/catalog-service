@@ -1,4 +1,4 @@
-package com.example.author.domain;
+package com.example.catalog.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,12 +15,15 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Entity
 @Builder
-public class Author {
+public class CatalogBooks {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @NotNull
-    private String name;
+    private Long catalogId;
+
+    @NotNull
+    private Long bookId;
 }
