@@ -15,6 +15,8 @@ public interface CatalogRepository extends JpaRepository<Catalog, Long> {
 
     Optional<Catalog> findById(@Param("id") Long id);
 
+    Optional<Catalog> findByName(@Param("name") String name);
+
     @Query("SELECT book from Catalog catalog INNER JOIN catalog.books book WHERE catalog.id = :id")
     Stream<CatalogBooks> findBooksByCatalog(@Param("id") Long id);
 }

@@ -30,7 +30,7 @@ public class BookServiceTest {
         restTemplate.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter()));
         service = new BookService(restTemplate);
 
-        customizer.getServer().expect(requestTo("http://localhost:8082/books/1"))
+        customizer.getServer().expect(requestTo("http://localhost:8081/books/1"))
                 .andRespond(withSuccess("{\"id\": 1, \"name\": \"TEST BOOK\"}", MediaType.APPLICATION_JSON));
     }
 

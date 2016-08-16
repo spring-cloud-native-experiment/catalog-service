@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,4 +27,12 @@ public class Catalog {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "catalogId")
     private List<CatalogBooks> books;
+
+    public void addBook(CatalogBooks book) {
+        if (books == null) {
+            books = new ArrayList<>();
+        }
+
+        books.add(book);
+    }
 }
