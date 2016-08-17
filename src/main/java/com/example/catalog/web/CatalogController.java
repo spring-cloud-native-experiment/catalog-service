@@ -58,8 +58,7 @@ class CatalogController {
     }
 
     @RequestMapping(method = POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity save(@RequestBody CatalogRequest catalogRequest) {
-        catalogService.save(catalogRequest);
-        return ResponseEntity.ok().build();
+    Catalog save(@RequestBody CatalogRequest catalogRequest) {
+        return catalogService.save(catalogRequest);
     }
 }

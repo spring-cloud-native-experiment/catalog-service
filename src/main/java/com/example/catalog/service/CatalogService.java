@@ -40,13 +40,13 @@ public class CatalogService {
         return repository.findBooksByCatalog(catalogId);
     }
 
-    public void save(CatalogRequest catalogRequest) {
+    public Catalog save(CatalogRequest catalogRequest) {
         Catalog catalog = findCatalogByName(catalogRequest.getName())
                 .orElse(Catalog.builder().name(catalogRequest.getName()).build());
         repository.save(catalog);
 
         Book book = bookService.getBookByBookId(catalogRequest.getBook());
         catalog.addBook(new CatalogBooks(null, catalog.getId(), book.getId()));
-        repository.save(catalog);
+        return repository.save(catalog);
     }
 }
