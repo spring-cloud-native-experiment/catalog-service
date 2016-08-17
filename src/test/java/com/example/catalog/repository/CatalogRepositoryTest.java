@@ -9,9 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,9 +32,10 @@ public class CatalogRepositoryTest {
 
         Optional<Catalog> savedCatalog = catalogRepository.findById(catalogId);
 
-        assertThat(savedCatalog.isPresent()).isTrue();
-        assertThat(savedCatalog.get().getId()).isEqualTo(catalogId);
-        assertThat(savedCatalog.get().getName()).isEqualTo(catalogName);
+        assertThat(savedCatalog).hasValueSatisfying(expected -> {
+            assertThat(expected).extracting(Catalog::getId).contains(catalogId);
+            assertThat(expected).extracting(Catalog::getName).contains(catalogName);
+        });
     }
 
     @Test
@@ -49,8 +48,6 @@ public class CatalogRepositoryTest {
 
         Stream<CatalogBooks> booksByCatalog = catalogRepository.findBooksByCatalog(catalogId);
 
-        List<CatalogBooks> books = booksByCatalog.collect(Collectors.toList());
-        assertThat(books).size().isEqualTo(2);
-        assertThat(books).extracting(CatalogBooks::getBookId).contains(1L, 2L);
+        assertThat(booksByCatalog).extracting(CatalogBooks::getBookId).contains(1L, 2L).hasSize(2);
     }
 }
