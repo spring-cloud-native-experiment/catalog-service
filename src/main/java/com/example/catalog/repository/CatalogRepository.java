@@ -2,6 +2,7 @@ package com.example.catalog.repository;
 
 import com.example.catalog.domain.Catalog;
 import com.example.catalog.domain.CatalogBooks;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +12,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @Repository
+@RefreshScope
 public interface CatalogRepository extends JpaRepository<Catalog, Long> {
 
     Optional<Catalog> findById(@Param("id") Long id);
